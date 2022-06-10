@@ -1,0 +1,13 @@
+---
+- name: 'import prepare_filesystem task'
+  import_tasks: 'prepare_filesystem.yaml'
+  tags:
+    - 'monitoring:filesystem'
+    - 'monitoring:init'
+
+- name: 'import create_container task'
+  import_tasks: 'create_container.yaml'
+  tags:
+    - 'monitoring:docker'
+    - 'monitoring:init'
+...

@@ -1,0 +1,15 @@
+---
+monitoring_state: 'present'
+monitoring_proto: 'http'
+monitoring_grafana_port: '3000'
+monitoring_influxdb_port: '8086'
+# monitoring_domain: ''
+monitoring_admin_username: 'admin'
+# monitoring_admin_password: ''
+monitoring_db_username: 'admin'
+# monitoring_db_password: ''
+monitoring_db_org: 'default'
+monitoring_db_bucket: 'default'
+monitoring_db_retention: '2w'
+monitoring_docker_host_dir: '/var/lib/grafana'
+...

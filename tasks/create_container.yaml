@@ -1,0 +1,60 @@
+---
+- name: 'create monitoring container'
+  tags:
+    - 'monitoring:container'
+    - 'monitoring:init'
+  docker_compose:
+    pull: true
+    project_name: 'monitoring'
+    state: '{{ monitoring_state }}'
+    definition:
+      version: '3'
+      networks:
+        monitoring_net:
+          external: false
+      services:
+        grafana:
+          image: 'grafana/grafana-oss:latest'
+          environment:
+            GF_SERVER_PROTOCOL: '{{ monitoring_proto }}'
+            GF_SERVER_DOMAIN: '{{ monitoring_domain }}'
+            GF_SERVER_ROOT_URL: '{{ monitoring_proto }}://{{ monitoring_domain }}'
+            GF_SECURITY_ADMIN_USER: '{{ monitoring_admin_username }}'
+            GF_SECURITY_ADMIN_PASSWORD: '{{ monitoring_admin_password }}'
+            GF_RENDERING_SERVER_URL: 'http://ir:8081/render'
+            GF_RENDERING_CALLBACK_URL: 'http://{{ monitoring_domain }}'
+          restart: 'unless-stopped'
+          volumes:
+            - '{{ monitoring_docker_host_dir }}/grafana/data:/var/lib/grafana'
+            - '{{ monitoring_docker_host_dir }}/grafana/conf:/etc/grafana'
+          networks:
+            - 'monitoring_net'
+          ports:
+            - '{{ monitoring_grafana_port }}:3000'
+          user: '109'
+          depends_on:
+            - 'influxdb'
+            - 'ir'
+        ir:
+          image: 'grafana/grafana-image-renderer:latest'
+          restart: 'unless-stopped'
+          networks:
+            - 'monitoring_net'
+        influxdb:
+          image: 'influxdb/influxdb:latest'
+          environment:
+            DOCKER_INFLUXDB_INIT_MODE: 'setup'
+            DOCKER_INFLUXDB_INIT_USERNAME: '{{ monitoring_db_username }}'
+            DOCKER_INFLUXDB_INIT_PASSWORD: '{{ monitoring_db_password }}'
+            DOCKER_INFLUXDB_INIT_ORG: '{{ monitoring_db_org }}'
+            DOCKER_INFLUXDB_INIT_BUCKET: '{{ monitoring_db_bucket }}'
+            DOCKER_INFLUXDB_INIT_RETENTION: '{{ monitoring_db_retention }}'
+          restart: 'unless-stopped'
+          volumes:
+            - '{{ monitoring_docker_host_dir }}/influxdb/data:/var/lib/influxdb2'
+            - '{{ monitoring_docker_host_dir }}/influxdb/conf:/etc/influxdb2'
+          networks:
+            - 'monitoring_net'
+          ports:
+            - '{{ monitoring_influxdb_port }}:8086'
+...
