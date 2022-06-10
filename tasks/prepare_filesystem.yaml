@@ -1,11 +1,21 @@
 ---
-- name: 'Create persistent folders'
+- name: 'Create grafana folders'
+  file:
+    path: '{{ monitoring_docker_host_dir }}/{{ item }}'
+    state: 'directory'
+    owner: '{{ monitoring_grafana_filesystem_user }}'
+  loop:
+    - 'grafana/data'
+    - 'grafana/conf'
+  tags:
+    - 'monitoring:filesystem'
+    - 'monitoring:init'
+
+- name: 'Create other folders folders'
   file:
     path: '{{ monitoring_docker_host_dir }}/{{ item }}'
     state: 'directory'
   loop:
-    - 'grafana/data'
-    - 'grafana/conf'
     - 'influxdb/data'
     - 'influxdb/conf'
   tags:

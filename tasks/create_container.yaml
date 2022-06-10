@@ -31,7 +31,7 @@
             - 'monitoring_net'
           ports:
             - '{{ monitoring_grafana_port }}:3000'
-          user: '109'
+          user: '{{ monitoring_grafana_filesystem_user }}'
           depends_on:
             - 'influxdb'
             - 'ir'
