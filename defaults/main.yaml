@@ -3,7 +3,6 @@ monitoring_state: 'present'
 monitoring_proto: 'http'
 monitoring_grafana_port: '3000'
 monitoring_influxdb_port: '8086'
-monitoring_telegraf_statsd_port: '8125'
 # monitoring_domain: ''
 monitoring_admin_username: 'admin'
 # monitoring_admin_password: ''
@@ -14,4 +13,28 @@ monitoring_db_bucket: 'default'
 monitoring_db_retention: '2w'
 monitoring_docker_host_dir: '/var/lib/grafana'
 monitoring_grafana_filesystem_user: '109'
+
+monitoring_telegraf_nginx_status_enabled: false
+monitoring_telegraf_nginx_proto: 'http'
+monitoring_telegraf_nginx_base_url: 'localhost'
+monitoring_telegraf_nginx_port: '8090'
+monitoring_telegraf_statsd_enabled: false
+monitoring_telegraf_statsd_proto: 'udp'
+monitoring_telegraf_statsd_max_tcp_connections: '250'
+monitoring_telegraf_statsd_tcp_keep_alive: 'false'
+# monitoring_telegraf_statsd_tcp_keep_alive_period: ''  # commented since it defaults to system
+monitoring_telegraf_statsd_service_address: '8125'
+monitoring_telegraf_statsd_delete_gauges: 'true'
+monitoring_telegraf_statsd_delete_counters: 'true'
+monitoring_telegraf_statsd_delete_sets: 'true'
+monitoring_telegraf_statsd_delete_timings: 'true'
+monitoring_telegraf_statsd_percentiles: [ 50.0, 90.0, 99.0, 99.9, 99.95, 100.0 ]
+monitoring_telegraf_statsd_percentile_limit: 1000
+monitoring_telegraf_statsd_metric_separator: '_'
+monitoring_telegraf_statsd_datalog_extensions: 'false'
+monitoring_telegraf_statsd_datalog_distributions: 'false'
+monitoring_telegraf_statsd_allowed_pending_messages: 10000
+monitoring_telegraf_statsd_read_buffer_size: 65535
+monitoring_telegraf_statsd_max_ttl: '10h'
+monitoring_telegraf_statsd_sanitize_name_method: ''
 ...

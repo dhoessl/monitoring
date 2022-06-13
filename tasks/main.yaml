@@ -5,6 +5,12 @@
     - 'monitoring:filesystem'
     - 'monitoring:init'
 
+- name: 'import create_config task'
+  import_tasks: 'create_config.yaml'
+  tags:
+    - 'monitoring:config'
+    - 'monitoring:init'
+
 - name: 'import create_container task'
   import_tasks: 'create_container.yaml'
   tags:

@@ -1,0 +1,37 @@
+[[outputs.influxdb]]
+  urls = ["http://influxdb:8086"]
+
+{% if monitoring_telegraf_nginx_status_enabled is sameas true -%}
+[[inputs.nginx]]
+  urls = ["{{ monitoring_telegraf_nginx_proto }}://{{ monitoring_telegraf_nginx_base_url }}:{{ monitoring_telegraf_nginx_port }}/nginx_status"]
+{% endif -%}
+
+{% if monitoring_telegraf_statsd_enabled is sameas true -%}
+[[inputs.statsd]]
+  protocol = "{{ monitoring_telegraf_statsd_proto }}"
+  {% if monitoring_telegraf_statsd_proto == "tcp" -%}
+  max_tcp_connections = {{ monitoring_telegraf_statsd_max_tcp_connections }}
+  tcp_keep_alive = {{ monitoring_telegraf_statsd_tcp_keep_alive }}
+  {% if monitoring_telegraf_statsd_tcp_keep_alive = "true" and monitoring_telegraf_statsd_tcp_keep_alive_period is defined -%}
+  tcp_keep_alive_period = monitoring_telegraf_statsd_tcp_keep_alive_period
+  {% endif -%}
+  {% endif -%}
+  service_address = ":{{ monitoring_telegraf_statsd_service_address }}"
+  delete_gauges = {{ monitoring_telegraf_statsd_delete_gauges }}
+  delete_counters = {{ monitoring_telegraf_statsd_delete_counters }}
+  delete_sets = {{ monitoring_telegraf_statsd_delete_sets }}
+  delete_timings = {{ monitoring_telegraf_statsd_delete_timings }}
+  percentiles = [{{ monitoring_telegraf_statsd_percentiles | join(',') }}]
+  percentile_limit = {{ monitoring_telegraf_statsd_percentile_limit }}
+  metric_separator = "{{ monitoring_telegraf_statsd_metric_separator }}"
+  datadog_extensions = {{ monitoring_telegraf_statsd_datalog_extensions }}
+  datadog_distributions = {{ monitoring_telegraf_statsd_datalog_distributions }}
+  {% if monitoring_telegraf_statsd_proto != "tcp" -%}
+  allowed_pending_messages = {{ monitoring_telegraf_statsd_allowed_pending_messages }}
+  {% endif -%}
+  read_buffer_size = {{ monitoring_telegraf_statsd_read_buffer_size }}
+  max_ttl = "{{ monitoring_telegraf_statsd_max_ttl }}"
+  {% if monitoring_telegraf_statsd_sanitize_name_method != "" -%}
+  sanitize_name_method = {{ monitoring_telegraf_statsd_sanitize_name_method }}
+  {% endif -%}
+{% endif -%}

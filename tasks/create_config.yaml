@@ -1,0 +1,10 @@
+---
+- name: 'create telegraf config'
+  template:
+    src: 'templates/telegraf.conf.j2'
+    dest: '{{ monitoring_docker_host_dir }}/telegraf/conf/telegraf.conf'
+    mode: '0644'
+  tags:
+    - 'monitoring:config'
+    - 'monitoring:config:telegraf'
+...
