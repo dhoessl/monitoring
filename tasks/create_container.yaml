@@ -59,7 +59,7 @@
           ports: []
           #   - '{{ monitoring_influxdb_port }}:8086'
         telegraf:
-          image: 'telegraf/telegraf:latest'
+          image: 'telegraf:latest'
           environment: []
           restart: 'unless-stopped'
           volumes:
