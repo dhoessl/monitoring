@@ -34,6 +34,7 @@
           user: '{{ monitoring_grafana_filesystem_user }}'
           depends_on:
             - 'influxdb'
+            - 'telegraf'
             - 'ir'
         ir:
           image: 'grafana/grafana-image-renderer:latest'
@@ -55,6 +56,18 @@
             - '{{ monitoring_docker_host_dir }}/influxdb/conf:/etc/influxdb2'
           networks:
             - 'monitoring_net'
+          ports: []
+          #   - '{{ monitoring_influxdb_port }}:8086'
+        telegraf:
+          image: 'telegraf/telegraf:latest'
+          environment: []
+          restart: 'unless-stopped'
+          volumes:
+            - '{{ monitoring_docker_host_dir }}/telegraf/conf:/etc/telegraf'
+          networks:
+            - 'monitoring_net'
           ports:
-            - '{{ monitoring_influxdb_port }}:8086'
+            - '{{ monitoring_telegraf_statsd_port }}:8125'
+          depends_on:
+            - 'influxdb'
 ...

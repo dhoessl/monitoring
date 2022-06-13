@@ -18,6 +18,8 @@
   loop:
     - 'influxdb/data'
     - 'influxdb/conf'
+    - 'telegraf/data'
+    - 'telegraf/conf'
   tags:
     - 'monitoring:filesystem'
     - 'monitoring:init'
