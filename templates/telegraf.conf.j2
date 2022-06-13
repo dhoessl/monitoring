@@ -4,7 +4,7 @@
 {% if monitoring_telegraf_nginx_status_enabled is sameas true -%}
 [[inputs.nginx]]
   urls = ["{{ monitoring_telegraf_nginx_proto }}://{{ monitoring_telegraf_nginx_base_url }}:{{ monitoring_telegraf_nginx_port }}/nginx_status"]
-{% endif -%}
+{% endif %}
 
 {% if monitoring_telegraf_statsd_enabled is sameas true -%}
 [[inputs.statsd]]
@@ -12,7 +12,7 @@
   {% if monitoring_telegraf_statsd_proto == "tcp" -%}
   max_tcp_connections = {{ monitoring_telegraf_statsd_max_tcp_connections }}
   tcp_keep_alive = {{ monitoring_telegraf_statsd_tcp_keep_alive }}
-  {% if monitoring_telegraf_statsd_tcp_keep_alive = "true" and monitoring_telegraf_statsd_tcp_keep_alive_period is defined -%}
+  {% if monitoring_telegraf_statsd_tcp_keep_alive == "true" and monitoring_telegraf_statsd_tcp_keep_alive_period is defined -%}
   tcp_keep_alive_period = monitoring_telegraf_statsd_tcp_keep_alive_period
   {% endif -%}
   {% endif -%}
