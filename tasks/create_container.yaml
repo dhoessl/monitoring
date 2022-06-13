@@ -33,7 +33,6 @@
             - '{{ monitoring_grafana_port }}:3000'
           user: '{{ monitoring_grafana_filesystem_user }}'
           depends_on:
-            - 'influxdb'
             - 'telegraf'
             - 'ir'
         ir:
@@ -67,7 +66,7 @@
           networks:
             - 'monitoring_net'
           ports:
-            - '{{ monitoring_telegraf_statsd_port }}:8125'
+            - '{{ monitoring_telegraf_statsd_service_address }}:8125'
           depends_on:
             - 'influxdb'
 ...
