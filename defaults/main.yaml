@@ -1,6 +1,9 @@
 ---
 monitoring_state: 'present'
 monitoring_docker_host_dir: '/var/lib/grafana'
+monitoring_docker_host_ssl_dir: '/etc/ssl'
+monitoring_ssl_cert_name: 'influxdb.crt'
+monitoring_ssl_key_name: 'influxdb.key'
 monitoring_grafana_filesystem_user: '109'
 monitoring_proto: 'http'
 monitoring_grafana_port: '3000'
