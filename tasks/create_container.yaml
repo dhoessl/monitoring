@@ -14,7 +14,7 @@
           external: false
       services:
         grafana:
-          image: 'grafana/grafana-oss:latest'
+          image: 'grafana/grafana:latest'
           environment:
             GF_SERVER_PROTOCOL: '{{ monitoring_proto }}'
             GF_SERVER_DOMAIN: '{{ monitoring_domain }}'
@@ -41,7 +41,7 @@
           networks:
             - 'monitoring_net'
         influxdb:
-          image: 'influxdb/influxdb:latest'
+          image: 'influxdb:latest'
           environment:
             DOCKER_INFLUXDB_INIT_MODE: 'setup'
             DOCKER_INFLUXDB_INIT_USERNAME: '{{ monitoring_db_username }}'
