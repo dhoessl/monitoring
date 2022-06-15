@@ -3,10 +3,7 @@ monitoring_server_enabled: true
 monitoring_client_enabled: true
 
 monitoring_state: 'present'
-monitoring_docker_host_dir: '/var/lib/grafana'
-monitoring_docker_host_ssl_dir: '/etc/ssl'
-monitoring_ssl_cert_name: 'influxdb.crt'
-monitoring_ssl_key_name: 'influxdb.key'
+monitoring_docker_host_dir: '/var/lib/monitoring'
 monitoring_grafana_filesystem_user: '109'
 monitoring_proto: 'http'
 monitoring_grafana_port: '3000'
@@ -55,4 +52,6 @@ monitoring_client_cpu_report_active: false
 monitoring_client_disk_enabled: false
 monitoring_client_disk_ignore_fs: [ 'tmpfs', 'devtmpfs', 'devfs', 'iso9660', 'overlay', 'aufs', 'squashfs' ]
 # monitoring_client_disk_mount_points: ['/']
+
+monitoring_client_mem_enabled: false
 ...

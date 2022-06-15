@@ -1,10 +1,36 @@
 ---
 - name: 'create telegraf config'
+  when: 'monitoring_server_enabled'
   template:
     src: 'templates/telegraf.conf.j2'
     dest: '{{ monitoring_docker_host_dir }}/telegraf/conf/telegraf.conf'
     mode: '0644'
   tags:
+    - 'monitoring:config:server'
     - 'monitoring:config'
-    - 'monitoring:config:telegraf'
+    - 'monitoring:init'
+
+- name: 'touch grafana config'
+  when: 'monitoring_server_enabled'
+  file:
+    path: '{{ monitoring_docker_host_dir }}/grafana/conf/grafana.ini'
+    owner: '{{ monitoring_grafana_filesystem_user }}'
+    state: 'touch'
+  tags:
+    - 'monitoring:config:server'
+    - 'monitoring:config'
+    - 'monitoring:init'
+    - 'init'
+    - 'never'
+
+- name: 'create telegraf client config'
+  when: 'monitoring_client_enabled'
+  template:
+    src: 'templates/telegraf_monitoring_client.conf.j2'
+    dest: '{{ monitoring_docker_host_dir }}/telegraf_client/conf/telegraf.conf'
+    mode: '0644'
+  tags:
+    - 'monitoring:config:client'
+    - 'monitoring:config'
+    - 'monitoring:init'
 ...

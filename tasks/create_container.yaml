@@ -1,10 +1,10 @@
 ---
 - name: 'create monitoring container'
+  when: 'monitoring_server_enabled'
   tags:
     - 'monitoring:container'
     - 'monitoring:init'
   docker_compose:
-    when: 'monitoring_server_enabled'
     pull: true
     project_name: 'monitoring'
     state: '{{ monitoring_state }}'
@@ -72,11 +72,11 @@
             - 'influxdb'
 
 - name: 'create monitoring client container'
+  when: 'monitoring_client_enabled'
   tags:
     - 'monitoring:container'
     - 'monitoring:init'
   docker_compose:
-    when: 'monitoring_client_enabled'
     pull: true
     project_name: 'monitoring_client'
     state: '{{ monitoring_state }}'
@@ -88,13 +88,14 @@
       services:
         telegraf:
           image: 'telegraf:latest'
+          hostname: '{{ ansible_hostname }}'
           environment:
             HOST_MOUNT_PREFIX: '/hostfs'
             HOST_PROC: '/hostfs/proc'
           restart: 'unless-stopped'
           volumes:
-            - '{{ monitoring_docker_host_dir }}/telegraf/conf:/etc/telegraf'
+            - '{{ monitoring_docker_host_dir }}/telegraf_client/conf:/etc/telegraf'
             - '/:/hostfs:ro'
           networks:
-            - 'monitoring_net'
+            - 'monitoring_client_net'
 ...

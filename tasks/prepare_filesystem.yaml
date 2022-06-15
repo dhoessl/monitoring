@@ -1,5 +1,6 @@
 ---
 - name: 'Create grafana folders'
+  when: 'monitoring_server_enabled'
   file:
     path: '{{ monitoring_docker_host_dir }}/{{ item }}'
     state: 'directory'
@@ -12,6 +13,7 @@
     - 'monitoring:init'
 
 - name: 'Create other folders folders'
+  when: 'monitoring_server_enabled'
   file:
     path: '{{ monitoring_docker_host_dir }}/{{ item }}'
     state: 'directory'
@@ -24,11 +26,13 @@
     - 'monitoring:filesystem'
     - 'monitoring:init'
 
-- name: 'touch grafana config'
+- name: 'Create monitoring client folders'
+  when: 'monitoring_client_enabled'
   file:
-    path: '{{ monitoring_docker_host_dir }}/grafana/conf/grafana.ini'
-    owner: '{{ monitoring_grafana_filesystem_user }}'
-    state: 'file'
+    path: '{{ monitoring_docker_host_dir }}/{{ item }}'
+    state: 'directory'
+  loop:
+    - 'telegraf_client/conf'
   tags:
     - 'monitoring:filesystem'
     - 'monitoring:init'
