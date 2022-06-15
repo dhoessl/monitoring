@@ -1,0 +1,21 @@
+[[outputs.influxdb_v2]]
+  urls = ["{{ monitoring_telegraf_nginx_proto }}://{{ monitoring_telegraf_nginx_base_url }}:{{ monitoring_influxdb_port }}"]
+  token = "{{ monitoring_influxdb_token }}"
+  organization = "{{ monitoring_db_org }}"
+  bucket = "{{ monitoring_db_bucket }}"
+
+{% if monitoring_client_cpu_enabled is sameas true -%}
+[[inputs.cpu]]
+  percpu = {%- if monitoring_client_cpu_percpu is sameas true -%}true{%- else -%}false{%- endif -%}
+  totalcpu = {%- if monitoring_client_cpu_totalcpu is sameas true -%}true{%- else -%}false{%- endif -%}
+  collect_cpu_time = {%- if monitoring_client_cpu_cpu_time is sameas true -%}true{%- else -%}false{%- endif -%}
+  report_active = {%- if monitoring_client_cpu_report_active is sameas true -%}true{%- else -%}false{%- endif -%}
+{% endif -%}
+
+{% if monitoring_client_disk_enabled is sameas true -%}
+[[inputs.disk]]
+  ignore_fs = [{{ monitoring_client_disk_ignore_fs|join(',') }}]
+  {% if monitoring_client_disk_mount_points is defined -%}
+  mount_points = [{{ monitoring_client_disk_mount_points|join(',') }}]
+  {% endif -%}
+{% endif %-}

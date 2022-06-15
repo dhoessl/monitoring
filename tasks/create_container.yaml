@@ -4,6 +4,7 @@
     - 'monitoring:container'
     - 'monitoring:init'
   docker_compose:
+    when: 'monitoring_server_enabled'
     pull: true
     project_name: 'monitoring'
     state: '{{ monitoring_state }}'
@@ -69,4 +70,31 @@
             - '{{ monitoring_telegraf_port }}:8125/udp'
           depends_on:
             - 'influxdb'
+
+- name: 'create monitoring client container'
+  tags:
+    - 'monitoring:container'
+    - 'monitoring:init'
+  docker_compose:
+    when: 'monitoring_client_enabled'
+    pull: true
+    project_name: 'monitoring_client'
+    state: '{{ monitoring_state }}'
+    definition:
+      version: '3'
+      networks:
+        monitoring_client_net:
+          external: false
+      services:
+        telegraf:
+          image: 'telegraf:latest'
+          environment:
+            HOST_MOUNT_PREFIX: '/hostfs'
+            HOST_PROC: '/hostfs/proc'
+          restart: 'unless-stopped'
+          volumes:
+            - '{{ monitoring_docker_host_dir }}/telegraf/conf:/etc/telegraf'
+            - '/:/hostfs:ro'
+          networks:
+            - 'monitoring_net'
 ...

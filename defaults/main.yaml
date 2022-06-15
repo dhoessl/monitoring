@@ -1,4 +1,7 @@
 ---
+monitoring_server_enabled: true
+monitoring_client_enabled: true
+
 monitoring_state: 'present'
 monitoring_docker_host_dir: '/var/lib/grafana'
 monitoring_docker_host_ssl_dir: '/etc/ssl'
@@ -42,4 +45,14 @@ monitoring_telegraf_statsd_allowed_pending_messages: 10000
 monitoring_telegraf_statsd_read_buffer_size: 65535
 monitoring_telegraf_statsd_max_ttl: '10h'
 monitoring_telegraf_statsd_sanitize_name_method: ''
+
+monitoring_client_cpu_enabled: false
+monitoring_client_cpu_percpu: true
+monitoring_client_cpu_totalcpu: true
+monitoring_client_cpu_cpu_time: false
+monitoring_client_cpu_report_active: false
+
+monitoring_client_disk_enabled: false
+monitoring_client_disk_ignore_fs: [ 'tmpfs', 'devtmpfs', 'devfs', 'iso9660', 'overlay', 'aufs', 'squashfs' ]
+# monitoring_client_disk_mount_points: ['/']
 ...
