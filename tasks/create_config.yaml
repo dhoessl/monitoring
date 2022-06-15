@@ -9,6 +9,8 @@
     - 'monitoring:config:server'
     - 'monitoring:config'
     - 'monitoring:init'
+  notify:
+    - 'restart telegraf'
 
 - name: 'touch grafana config'
   when: 'monitoring_server_enabled'
@@ -33,4 +35,6 @@
     - 'monitoring:config:client'
     - 'monitoring:config'
     - 'monitoring:init'
+  notify:
+    - 'restart telegraf client'
 ...

@@ -1,0 +1,7 @@
+---
+- name: 'restart telegraf'
+  command: 'docker restart monitoring_telegraf_1'
+
+- name: 'restart telegraf client'
+  command: 'docker restart monitoring_client_telegraf_1'
+...
