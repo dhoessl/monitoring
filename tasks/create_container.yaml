@@ -49,13 +49,10 @@
             DOCKER_INFLUXDB_INIT_ORG: '{{ monitoring_db_org }}'
             DOCKER_INFLUXDB_INIT_BUCKET: '{{ monitoring_db_bucket }}'
             DOCKER_INFLUXDB_INIT_RETENTION: '{{ monitoring_db_retention }}'
-            INFLUXD_TLS_CERT: '/etc/ssl/{{ monitoring_tls_cert_name }}'
-            INFLUXD_TLS_KEY: '/etc/ssl/{{ monitoring_tls_key_name }}'
+            DOCKER_INFLUXDB_INIT_ADMIN_TOKEN: '{{ monitoring_influxdb_token }}'
           restart: 'unless-stopped'
           volumes:
             - '{{ monitoring_docker_host_dir }}/influxdb/data:/var/lib/influxdb2'
-            - '{{ monitoring_docker_host_dir }}/influxdb/conf:/etc/influxdb2'
-            - '{{ monitoring_docker_host_ssl_dir }}:/etc/ssl/'
           networks:
             - 'monitoring_net'
           ports:
