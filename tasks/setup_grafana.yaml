@@ -1,0 +1,52 @@
+---
+- name: 'Check if influxdb Datasource already exists'
+  uri:
+    url: 'https://monitoring.dhoessl.de/api/datasources/name/InfluxDB'
+    user: '{{ monitoring_admin_username }}'
+    password: '{{ monitoring_admin_password }}'
+    method: 'GET'
+    return_content: true
+    force_basic_auth: true
+    status_code: [ 200, 404 ]
+  register: 'ds_influx_check'
+
+- name: 'Create InfluxDB Datasource'
+  uri:
+    url: 'https://monitoring.dhoessl.de/api/datasources/'
+    user: '{{ monitoring_admin_username }}'
+    password: '{{ monitoring_admin_password }}'
+    method: 'POST'
+    force_basic_auth: true
+    body_format: 'json'
+    return_content: false
+    headers:
+      Content-Type: 'application/json'
+      Accept: 'application/json'
+    body: '{{ lookup(''template'', ''roles/monitoring/templates/grafana_influxdb_datasources.json.j2'') }}'
+  when: '''Data source not found'' in ds_influx_check.content'
+
+- name: 'check for default dashboard'
+  uri:
+    url: 'https://monitoring.dhoessl.de/api/search?folderIds=0'
+    user: '{{ monitoring_admin_username }}'
+    password: '{{ monitoring_admin_password }}'
+    method: 'GET'
+    return_content: true
+    force_basic_auth: true
+  register: 'dashboard_check'
+
+- name: 'create default dashboard'
+  uri:
+    url: 'https://monitoring.dhoessl.de/api/dashboards/db'
+    user: '{{ monitoring_admin_username }}'
+    password: '{{ monitoring_admin_password }}'
+    method: 'POST'
+    force_basic_auth: true
+    body_format: 'json'
+    return_content: false
+    headers:
+      Content-Type: 'application/json'
+      Accept: 'application/json'
+    body: '{{ lookup(''template'', ''roles/monitoring/templates/grafana_dashboard_create.json.j2'') }}'
+  when: 'dashboard_check.content == ''[]'''
+...

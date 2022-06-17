@@ -16,4 +16,10 @@
   tags:
     - 'monitoring:docker'
     - 'monitoring:init'
+
+- name: 'import setup_grafana.yaml'
+  import_tasks: 'setup_grafana.yaml'
+  tags:
+    - 'monitoring:grafana'
+    - 'monitoring:init'
 ...

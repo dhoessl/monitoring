@@ -1,0 +1,27 @@
+{
+  "orgId":1,
+  "name":"InfluxDB",
+  "type":"influxdb",
+  "typeLogoUrl":"",
+  "access":"proxy",
+  "url":"http://influxdb:8086",
+  "password":"",
+  "user":"",
+  "database":"",
+  "basicAuth":False,
+  "basicAuthUser":"",
+  "basicAuthPassword":"",
+  "withCredentials":False,
+  "isDefault":False,
+  "jsonData":{
+      "defaultBucket":"{{ monitoring_db_bucket }}",
+      "httpMode":"POST",
+      "organization":"{{ monitoring_db_org }}",
+      "version":"Flux"
+  },
+  "secureJsonData":{
+      "token": "{{ monitoring_influxdb_token }}"
+  },
+  "version":2,
+  "readOnly":False
+}
