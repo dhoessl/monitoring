@@ -29,6 +29,7 @@
     "liveNow": false,
     "panels": [
       {
+        {% if monitoring_telegraf_nginx_status_enabled is sameas true -%}
         "datasource": {
           "type": "influxdb",
           "uid": "PYw0r8C7k"
@@ -114,6 +115,8 @@
         "title": "Nginx Monitoring",
         "type": "timeseries"
       },
+      {% endif -%}
+      {% if monitoring_client_mem_enabled is sameas true -%}
       {
         "datasource": {
           "type": "influxdb",
@@ -202,6 +205,8 @@
         "title": "Memory Monitoring",
         "type": "timeseries"
       },
+      {% endif -%}
+      {% if monitoring_client_cpu_enabled is sameas true -%}
       {
         "datasource": {
           "type": "influxdb",
@@ -291,6 +296,8 @@
         "title": "Cpu Usage Monitoring",
         "type": "timeseries"
       },
+      {% endif -%}
+      {% if monitoring_client_disk_enabled is sameas true -%}
       {
         "datasource": {
           "type": "influxdb",
@@ -378,8 +385,9 @@
         "title": "Disk Monitoring",
         "type": "timeseries"
       }
+      {% endif -%}
     ],
-    "refresh": false,
+    "refresh": "5m",
     "schemaVersion": 36,
     "style": "dark",
     "tags": [

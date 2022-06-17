@@ -1,6 +1,7 @@
 ---
 monitoring_server_enabled: true
 monitoring_client_enabled: true
+monitoring_init_grafana: true
 
 monitoring_state: 'present'
 monitoring_docker_host_dir: '/var/lib/monitoring'

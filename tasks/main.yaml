@@ -22,4 +22,5 @@
   tags:
     - 'monitoring:grafana'
     - 'monitoring:init'
+  when: 'monitoring_init_grafana'
 ...
