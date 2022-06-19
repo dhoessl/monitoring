@@ -1,4 +1,14 @@
 ---
+- name: 'fail if passwords are not set'
+  fail:
+    msg: 'some passwords are not set! Please consult README.md to see which vars need to be set'
+  when: 'monitoring_grafana_password is not defined or
+         monitoring_influxdb_password is not defined or
+         monitoring_influxdb_token is not defined'
+  tags:
+    - 'monitoring:init'
+    - 'monitoring:always'
+
 - name: 'import prepare_filesystem task'
   import_tasks: 'prepare_filesystem.yaml'
   tags:

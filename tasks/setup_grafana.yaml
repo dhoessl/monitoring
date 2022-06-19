@@ -2,8 +2,8 @@
 - name: 'Check if influxdb Datasource already exists'
   uri:
     url: 'https://monitoring.dhoessl.de/api/datasources/name/InfluxDB'
-    user: '{{ monitoring_admin_username }}'
-    password: '{{ monitoring_admin_password }}'
+    user: '{{ monitoring_grafana_username }}'
+    password: '{{ monitoring_grafana_password }}'
     method: 'GET'
     return_content: true
     force_basic_auth: true
@@ -13,8 +13,8 @@
 - name: 'Create InfluxDB Datasource'
   uri:
     url: 'https://monitoring.dhoessl.de/api/datasources/'
-    user: '{{ monitoring_admin_username }}'
-    password: '{{ monitoring_admin_password }}'
+    user: '{{ monitoring_grafana_username }}'
+    password: '{{ monitoring_grafana_password }}'
     method: 'POST'
     force_basic_auth: true
     body_format: 'json'
@@ -28,8 +28,8 @@
 - name: 'check for default dashboard'
   uri:
     url: 'https://monitoring.dhoessl.de/api/search?folderIds=0'
-    user: '{{ monitoring_admin_username }}'
-    password: '{{ monitoring_admin_password }}'
+    user: '{{ monitoring_grafana_username }}'
+    password: '{{ monitoring_grafana_password }}'
     method: 'GET'
     return_content: true
     force_basic_auth: true
@@ -38,8 +38,8 @@
 - name: 'create default dashboard'
   uri:
     url: 'https://monitoring.dhoessl.de/api/dashboards/db'
-    user: '{{ monitoring_admin_username }}'
-    password: '{{ monitoring_admin_password }}'
+    user: '{{ monitoring_grafana_username }}'
+    password: '{{ monitoring_grafana_password }}'
     method: 'POST'
     force_basic_auth: true
     body_format: 'json'

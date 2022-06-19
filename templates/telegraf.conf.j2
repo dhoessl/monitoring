@@ -3,9 +3,9 @@
 
 [[outputs.influxdb_v2]]
   urls = ["http://influxdb:8086"]
-  token = "{{ monitoring_influxdb_token }}"
-  organization = "{{ monitoring_db_org }}"
-  bucket = "{{ monitoring_db_bucket }}"
+  token = "{{ monitoring_influxinfluxdb_token }}"
+  organization = "{{ monitoring_influxdb_org }}"
+  bucket = "{{ monitoring_influxdb_bucket }}"
 
 {% if monitoring_telegraf_nginx_status_enabled is sameas true -%}
 [[inputs.nginx]]

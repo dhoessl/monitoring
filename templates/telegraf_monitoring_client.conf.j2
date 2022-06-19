@@ -1,8 +1,8 @@
 [[outputs.influxdb_v2]]
   urls = ["{{ monitoring_proto }}://{{ monitoring_domain }}:{{ monitoring_influxdb_port }}"]
   token = "{{ monitoring_influxdb_token }}"
-  organization = "{{ monitoring_db_org }}"
-  bucket = "{{ monitoring_db_bucket }}"
+  organization = "{{ monitoring_influxdb_org }}"
+  bucket = "{{ monitoring_influxdb_bucket }}"
 
 {% if monitoring_client_cpu_enabled is sameas true -%}
 [[inputs.cpu]]
