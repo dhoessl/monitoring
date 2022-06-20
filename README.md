@@ -122,8 +122,8 @@ Eiter exclude them by using `--exclude-tags` or just run some tags by using `--t
 ## Grafana vars
 |Variable                           | Default           | datatype  | Description|
 |---                                |---                |---        |---|
+|monitoring_init_grafana            | true              | boolean   | Enable/Disable grafana datasource and dashboard creation |
 |monitoring_grafana_filesystem_user | 109               | string    | User which will be used for grafana container and its persistent files |
-|monitoring_init_grafana            | true              | boolean   | Enable/Disabel grafana datasource and dashboard creation |
 |monitoring_grafana_port            | 3000              | string    | Port on which grafana will be available in the web |
 |monitoring_grafana_username        | admin             | string    | User to login to Grafana |
 |monitoring_grafana_password        |                   | string    | Should be vault encrypted - Password to login to Grafana |
