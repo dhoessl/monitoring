@@ -8,6 +8,9 @@
   tags:
     - 'monitoring:init'
     - 'monitoring:always'
+    - 'monitoring:config'
+    - 'monitoring:docker'
+    - 'monitoring:grafana'
 
 - name: 'import prepare_filesystem task'
   import_tasks: 'prepare_filesystem.yaml'

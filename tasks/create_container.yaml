@@ -3,6 +3,7 @@
   when: 'monitoring_server_enabled'
   tags:
     - 'monitoring:container'
+    - 'monitoring:container:server'
     - 'monitoring:init'
   docker_compose:
     pull: true
@@ -75,6 +76,7 @@
   when: 'monitoring_client_enabled'
   tags:
     - 'monitoring:container'
+    - 'monitoring:container:client'
     - 'monitoring:init'
   docker_compose:
     pull: true
