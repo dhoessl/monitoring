@@ -30,7 +30,7 @@ Some Variables need to be set before running this role.
 
 It is '''recommended''' to also change the usernames of the grafana and infludb user.
 
-Since there are passwords included, they should be saved in a ansible vault file ([https://docs.ansible.com/ansible/latest/cli/ansible-vault.html#create](Ansible Vault Documentation)).
+Since there are passwords included, they should be saved in a ansible vault file ([Ansible Vault Documentation](https://docs.ansible.com/ansible/latest/cli/ansible-vault.html#create)).
 
 #### Variables Grafana Host
 This variables need to be set to the server which is hosting the grafana server. This passwords should be atleast 16 chars long.
@@ -141,12 +141,12 @@ Eiter exclude them by using `--exclude-tags` or just run some tags by using `--t
 ## Telegraf server vars
 |Variable                                             | Default   | datatype | Description|
 |---                                                  |---        |---       |---|
-|monitoring_telegraf_port                             | 8125      | string   | Default [https://github.com/influxdata/telegraf/blob/release-1.23/plugins/inputs/statsd/README.md](StatsD) Port|
-|monitoring_telegraf_nginx_status_enabled             | false     | boolean  | Enable/Disable rollout of [https://github.com/influxdata/telegraf/blob/release-1.14/plugins/inputs/nginx/README.md](nginx telegraf plugin) on server|
+|monitoring_telegraf_port                             | 8125      | string   | Default [StatsD](https://github.com/influxdata/telegraf/blob/release-1.23/plugins/inputs/statsd/README.md) Port|
+|monitoring_telegraf_nginx_status_enabled             | false     | boolean  | Enable/Disable rollout of [nginx telegraf plugin](https://github.com/influxdata/telegraf/blob/release-1.14/plugins/inputs/nginx/README.md) on server|
 |monitoring_telegraf_nginx_proto                      | http      | string   | set protocol for nginx telegraf plugin |
 |monitoring_telegraf_nginx_base_url                   | localhost | string   | set base_url for nginx telegraf plugin |
 |monitoring_telegraf_nginx_port                       | 8090      | string   | set port for nginx telegraf plugin |
-|monitoring_telegraf_statsd_enabled                   | false     | boolean  | Enable/Disable rollout of [https://github.com/influxdata/telegraf/blob/release-1.23/plugins/inputs/statsd/README.md](StatsD Server) for telegraf container on docker host |
+|monitoring_telegraf_statsd_enabled                   | false     | boolean  | Enable/Disable rollout of [StatsD](https://github.com/influxdata/telegraf/blob/release-1.23/plugins/inputs/statsd/README.md) Server for telegraf container on docker host |
 |monitoring_telegraf_statsd_proto                     | udp       | string   | StatsD Port |
 |monitoring_telegraf_statsd_max_tcp_connections       | 250       | string   | StatsD max_tcp_connection when proto is tcp|
 |monitoring_telegraf_statsd_tcp_keep_alive            | false     | string   | StatsD tcp_keep_alive when proto is tcp|
@@ -157,14 +157,14 @@ Eiter exclude them by using `--exclude-tags` or just run some tags by using `--t
 |monitoring_telegraf_statsd_delete_sets               | true      | string   | Reset Sets every interval|
 |monitoring_telegraf_statsd_delete_timings            | true      | string   | Reset timings and histograms every interval|
 |monitoring_telegraf_statsd_percentiles               | [ 50.0, 90.0, 99.0, 99.9, 99.95, 100.0 ] | list | Percentiles to calculate for timing an histogram stats|
-|monitoring_telegraf_statsd_percentile_limit          | 1000  | int     | consult [https://github.com/influxdata/telegraf/blob/release-1.23/plugins/inputs/statsd/README.md](StatsD Documentation)|
-|monitoring_telegraf_statsd_metric_separator          | '_'   | string  | consult [https://github.com/influxdata/telegraf/blob/release-1.23/plugins/inputs/statsd/README.md](StatsD Documentation)|
-|monitoring_telegraf_statsd_datalog_extensions        | false | string  | consult [https://github.com/influxdata/telegraf/blob/release-1.23/plugins/inputs/statsd/README.md](StatsD Documentation)|
-|monitoring_telegraf_statsd_datalog_distributions     | false | string  | consult [https://github.com/influxdata/telegraf/blob/release-1.23/plugins/inputs/statsd/README.md](StatsD Documentation)|
-|monitoring_telegraf_statsd_allowed_pending_messages  | 10000 | int     | consult [https://github.com/influxdata/telegraf/blob/release-1.23/plugins/inputs/statsd/README.md](StatsD Documentation)|
-|monitoring_telegraf_statsd_read_buffer_size          | 65535 | int     | consult [https://github.com/influxdata/telegraf/blob/release-1.23/plugins/inputs/statsd/README.md](StatsD Documentation)|
-|monitoring_telegraf_statsd_max_ttl                   | 10h   | string  | consult [https://github.com/influxdata/telegraf/blob/release-1.23/plugins/inputs/statsd/README.md](StatsD Documentation)|
-|monitoring_telegraf_statsd_sanitize_name_method      | ''    | string  | consult [https://github.com/influxdata/telegraf/blob/release-1.23/plugins/inputs/statsd/README.md](StatsD Documentation)|
+|monitoring_telegraf_statsd_percentile_limit          | 1000  | int     | consult [StatsD Documentation](https://github.com/influxdata/telegraf/blob/release-1.23/plugins/inputs/statsd/README.md)|
+|monitoring_telegraf_statsd_metric_separator          | '_'   | string  | consult [StatsD Documentation](https://github.com/influxdata/telegraf/blob/release-1.23/plugins/inputs/statsd/README.md)|
+|monitoring_telegraf_statsd_datalog_extensions        | false | string  | consult [StatsD Documentation](https://github.com/influxdata/telegraf/blob/release-1.23/plugins/inputs/statsd/README.md)|
+|monitoring_telegraf_statsd_datalog_distributions     | false | string  | consult [StatsD Documentation](https://github.com/influxdata/telegraf/blob/release-1.23/plugins/inputs/statsd/README.md)|
+|monitoring_telegraf_statsd_allowed_pending_messages  | 10000 | int     | consult [StatsD Documentation](https://github.com/influxdata/telegraf/blob/release-1.23/plugins/inputs/statsd/README.md)|
+|monitoring_telegraf_statsd_read_buffer_size          | 65535 | int     | consult [StatsD Documentation](https://github.com/influxdata/telegraf/blob/release-1.23/plugins/inputs/statsd/README.md)|
+|monitoring_telegraf_statsd_max_ttl                   | 10h   | string  | consult [StatsD Documentation](https://github.com/influxdata/telegraf/blob/release-1.23/plugins/inputs/statsd/README.md)|
+|monitoring_telegraf_statsd_sanitize_name_method      | ''    | string  | consult [StatsD Documentation](https://github.com/influxdata/telegraf/blob/release-1.23/plugins/inputs/statsd/README.md)|
 
 ## Telegraf client vars
 |Variable                             | Default | datatype  | Description|
