@@ -2,8 +2,8 @@
 - name: 'fail if passwords are not set'
   fail:
     msg: 'some passwords are not set! Please consult README.md to see which vars need to be set'
-  when: 'monitoring_grafana_password is not defined or
-         monitoring_influxdb_password is not defined or
+  when: '(monitoring_server_enabled and monitoring_grafana_password is not defined) or
+         (monitoring_server_enabled and monitoring_influxdb_password is not defined) or
          monitoring_influxdb_token is not defined'
   tags:
     - 'monitoring:init'
@@ -35,5 +35,5 @@
   tags:
     - 'monitoring:grafana'
     - 'monitoring:init'
-  when: 'monitoring_init_grafana'
+  when: 'monitoring_init_grafana and monitoring_server_enabled'
 ...
