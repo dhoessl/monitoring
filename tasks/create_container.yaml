@@ -5,12 +5,11 @@
     - 'monitoring:container'
     - 'monitoring:container:server'
     - 'monitoring:init'
-  docker_compose:
-    pull: true
+  community.docker.docker_compose_v2:
+    pull: "awlays"
     project_name: 'monitoring'
     state: '{{ monitoring_state }}'
     definition:
-      version: '3'
       networks:
         monitoring_net:
           external: false
@@ -78,12 +77,11 @@
     - 'monitoring:container'
     - 'monitoring:container:client'
     - 'monitoring:init'
-  docker_compose:
-    pull: true
+  community.docker.docker_compose_v2:
+    pull: "always"
     project_name: 'monitoring_client'
     state: '{{ monitoring_state }}'
     definition:
-      version: '3'
       networks:
         monitoring_client_net:
           external: false
