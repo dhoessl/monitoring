@@ -6,7 +6,7 @@
     - 'monitoring:container:server'
     - 'monitoring:init'
   community.docker.docker_compose_v2:
-    pull: "awlays"
+    pull: "always"
     project_name: 'monitoring'
     state: '{{ monitoring_state }}'
     definition:
