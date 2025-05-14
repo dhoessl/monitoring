@@ -49,4 +49,5 @@
       Accept: 'application/json'
     body: '{{ lookup(''template'', ''roles/monitoring/templates/grafana_dashboard_create.json.j2'') }}'
   when: 'dashboard_check.content == ''[]'''
+  ignore_erros: true # fails if template was changed by hand
 ...
