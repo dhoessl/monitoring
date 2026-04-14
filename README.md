@@ -1,3 +1,5 @@
+# ATTENTION: With the use of prometheus i will archive this project
+
 # Grafana Monitoring Server
 
 Ansible role to automaticly deploy a grafana/influxdb monitoring.
